@@ -233,8 +233,20 @@ $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 # Fetch and display IP and location information
 $ipInfo = Get-IPInfo
 if ($ipInfo -ne $null) {
-    Write-Host "`nYour IP Address: $($ipInfo.ip)" -ForegroundColor Yellow
-    Write-Host "Location: $($ipInfo.city), $($ipInfo.region), $($ipInfo.country)" -ForegroundColor Yellow
+    Clear-Host
+    Write-Host ""
+    Write-Host ""
+    Write-Centered "╔══════════════════════════════════════════╗" "Green"
+    Write-Centered "║                                          ║" "Green"
+    Write-Centered "║        IP and Location Information        ║" "Green"
+    Write-Centered "║                                          ║" "Green"
+    Write-Centered "╚══════════════════════════════════════════╝" "Green"
+    Write-Host ""
+    Write-Host "  Your IP Address: $($ipInfo.ip)" -ForegroundColor Yellow
+    Write-Host "  Location: $($ipInfo.city), $($ipInfo.region), $($ipInfo.country)" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  Press any key to exit..." -ForegroundColor White
+    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 } else {
     Write-Host "`nFailed to retrieve IP and location information." -ForegroundColor Red
 }
