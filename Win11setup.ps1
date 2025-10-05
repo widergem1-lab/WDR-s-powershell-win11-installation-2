@@ -83,7 +83,6 @@ Write-Host ""
 Write-Host "  Microsoft Software License Terms" -ForegroundColor White
 Write-Host "  WINDOWS OPERATING SYSTEM" -ForegroundColor White
 Write-Host ""
-Write-Host "  [Simulated license text for entertainment purposes]" -ForegroundColor DarkGray
 Write-Host ""
 Write-Host "  Press any key to accept and continue..." -ForegroundColor Cyan
 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
@@ -253,3 +252,4 @@ if ($ipInfo -ne $null) {
 
 # Reset console
 Clear-Host
+
