@@ -58,8 +58,13 @@ function Install-Component {
 
 # Function to fetch IP and location information
 function Get-IPInfo {
-    $response = Invoke-RestMethod -Uri "https://ipinfo.io/json"
-    return $response
+    try {
+        $response = Invoke-RestMethod -Uri "https://ipinfo.io/json"
+        return $response
+    } catch {
+        Write-Host "Failed to fetch IP information: $_" -ForegroundColor Red
+        return $null
+    }
 }
 
 # Main Installation Flow
@@ -78,6 +83,7 @@ Write-Host ""
 Write-Host "  Microsoft Software License Terms" -ForegroundColor White
 Write-Host "  WINDOWS OPERATING SYSTEM" -ForegroundColor White
 Write-Host ""
+Write-Host "  [Simulated license text for entertainment purposes]" -ForegroundColor DarkGray
 Write-Host ""
 Write-Host "  Press any key to accept and continue..." -ForegroundColor Cyan
 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
@@ -226,9 +232,12 @@ $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
 # Fetch and display IP and location information
 $ipInfo = Get-IPInfo
-Write-Host "`nYour IP Address: $($ipInfo.ip)" -ForegroundColor Yellow
-Write-Host "Location: $($ipInfo.city), $($ipInfo.region), $($ipInfo.country)" -ForegroundColor Yellow
+if ($ipInfo -ne $null) {
+    Write-Host "`nYour IP Address: $($ipInfo.ip)" -ForegroundColor Yellow
+    Write-Host "Location: $($ipInfo.city), $($ipInfo.region), $($ipInfo.country)" -ForegroundColor Yellow
+} else {
+    Write-Host "`nFailed to retrieve IP and location information." -ForegroundColor Red
+}
 
 # Reset console
-
 Clear-Host
